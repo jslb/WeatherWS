@@ -24,7 +24,7 @@ request('http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&ap
 
 
 app.post('/submit-location-data', function (req, res) {
-    var name = req.body.startLocation + ' ' + req.body.numDays;
+    
     var startVar = req.body.startLocation;
     var daysVar = req.body.numDays;
     var startVar2 = '' + startVar;
@@ -38,16 +38,16 @@ app.post('/submit-location-data', function (req, res) {
         temp = 'ERROR';
     }
     
-    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + startVar2 + '&units=metric&appid='+ apikey;
+    var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + startVar2 + '&units=' + temp + '&appid='+ apikey;
     console.log(url);
 
     request({url: url}, function(err, res, body) {
-        console.log(req.body.name);
+        console.log(req.body.name); 
 
     }); 
 
 
-    res.send('Showing weather for ' + daysVar + ' days, in ' + startVar);
+    res.send('Showing weather for ' + daysVar + ', in ' + startVar + ': ');
 });
 
 var server = app.listen(5000, function () {
