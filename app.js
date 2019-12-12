@@ -3,9 +3,10 @@ var app = express();
 
 const request = require('request');
 
-var bodyParser = require("body-parser");
+const  bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -16,13 +17,11 @@ app.get('/', function (req, res) {
 
 request('http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&appid=93abcd905332612d2a77ca3a4e1b2aa7', function(err, res, body) {
     console.log(body);
-   
 });
 
 
 
 app.post('/submit-location-data', function (req, res) {
-    var name = req.body.startLocation + ' ' + req.body.numDays;
     var startVar = req.body.startLocation;
     var daysVar = req.body.numDays;
     var startVar2 = '' + startVar;
@@ -30,12 +29,10 @@ app.post('/submit-location-data', function (req, res) {
     console.log(url);
 
     request({url: url}, function(err, res, body) {
-        console.log(req.body.name);
-
+        console.log(body);
     }); 
 
-
-    res.send('Showing weather for ' + daysVar + ' days, in ' + startVar);
+    res.send('Showing weather for ' + daysVar + ' days, in ' + startVar + 'Temperature:  ' + req.body.name);
 });
 
 var server = app.listen(5000, function () {
