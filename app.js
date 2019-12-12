@@ -42,7 +42,7 @@ app.post('/submit-location-data', function (req, res) {
 	tempvar = results.main.temp;
     }); 
 
-    res.send('Showing weather for ' + unitString + ' days, in ' + startVar + '. Temperature:  ' + tempvar);
+    res.send('Showing weather for ' + startVar + ', in ' + unitString + '. Temperature:  ' + tempvar);
 });
 
 var server = app.listen(5000, function () {
